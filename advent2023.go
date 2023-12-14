@@ -6,8 +6,12 @@ import (
 	"os"
 )
 
-var days = map[string]func(string){
-	"day01": day01.Run,
+type Day interface {
+	Run(fileName string)
+}
+
+var days = map[string]Day{
+	"day01": day01.Day01{},
 }
 
 func main() {
@@ -21,7 +25,7 @@ func main() {
 	fileName := fmt.Sprintf("%s/input.txt", dayToRun)
 
 	if day, ok := days[dayToRun]; ok {
-		day(fileName)
+		day.Run(fileName)
 	} else {
 		fmt.Println("Please provide a valid day to run.")
 		os.Exit(1)

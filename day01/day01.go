@@ -6,7 +6,9 @@ import (
 	"os"
 )
 
-func Run(fileName string) {
+type Day01 struct{}
+
+func (d Day01) Run(fileName string) {
 	part01Answer := 0
 	part02Answer := 0
 
