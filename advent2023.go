@@ -1,76 +1,29 @@
 package main
 
 import (
-	"bufio"
-	"log"
+	"AdventOfCode/day01"
+	"fmt"
 	"os"
-	"regexp"
-	"strconv"
 )
 
-var wordToNumberMap = map[string]string{
-	"zero":  "0",
-	"one":   "1",
-	"two":   "2",
-	"three": "3",
-	"four":  "4",
-	"five":  "5",
-	"six":   "6",
-	"seven": "7",
-	"eight": "8",
-	"nine":  "9",
-}
-
-func GetCalibrationValue(input string) int {
-	var result int = 0
-	pattern := regexp.MustCompile(`(one|two|three|four|five|six|seven|eight|nine|zero|\d)`)
-
-	matches := pattern.FindAllString(input, -1)
-
-	if matches != nil {
-		// Check if any of the matches are spelled out numbers, if so, convert them to digits
-		for i, match := range matches {
-			if numericValue, ok := wordToNumberMap[match]; ok {
-				matches[i] = numericValue
-			}
-		}
-
-		if len(matches) == 1 {
-			result, _ = strconv.Atoi(matches[0] + matches[0])
-		} else {
-			result, _ = strconv.Atoi(matches[0] + matches[len(matches)-1])
-		}
-	}
-
-	return result
+var days = map[string]func(string){
+	"day01": day01.Run,
 }
 
 func main() {
-	calibrationValuesSum := 0
-
-	fileName := os.Args[1]
-
-	file, err := os.Open(fileName)
-	if err != nil {
-		panic(err)
-	}
-	defer func(file *os.File) {
-		err := file.Close()
-		if err != nil {
-			panic(err)
-		}
-	}(file)
-
-	scanner := bufio.NewScanner(file)
-
-	for scanner.Scan() {
-		line := scanner.Text()
-		calibrationValuesSum += GetCalibrationValue(line)
+	if len(os.Args) < 2 {
+		fmt.Println("Please provide a day to run.")
+		os.Exit(1)
 	}
 
-	if err := scanner.Err(); err != nil {
-		panic(err)
-	}
+	dayToRun := os.Args[1]
 
-	log.Printf("Calibration values sum: %d", calibrationValuesSum)
+	fileName := fmt.Sprintf("%s/input.txt", dayToRun)
+
+	if day, ok := days[dayToRun]; ok {
+		day(fileName)
+	} else {
+		fmt.Println("Please provide a valid day to run.")
+		os.Exit(1)
+	}
 }

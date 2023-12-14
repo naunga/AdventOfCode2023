@@ -1,11 +1,11 @@
-package main
+package day01
 
 import (
 	"fmt"
 	"testing"
 )
 
-func TestDay01(t *testing.T) {
+func TestDay01Part01(t *testing.T) {
 	testData := []struct {
 		input string
 		want  int
@@ -16,12 +16,12 @@ func TestDay01(t *testing.T) {
 		{"treb7uchet", 77},
 		{"four82nine74", 84},
 		{"hlpqrdh3", 33},
-		{"two1nine", 29},
+		{"two1nine", 11},
 	}
 
 	for _, td := range testData {
 		t.Run(fmt.Sprintf("GetCalibrationValue_%s", td.input), func(t *testing.T) {
-			have := GetCalibrationValue(td.input)
+			have := GetPart01Value(td.input)
 			if have != td.want {
 				t.Errorf("Expected have to be %d, got %d", td.want, have)
 			}
