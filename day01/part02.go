@@ -1,7 +1,6 @@
 package day01
 
 import (
-	"log"
 	"regexp"
 	"strconv"
 )
@@ -52,8 +51,6 @@ func GetPart02Value(input string) int {
 			result, _ = strconv.Atoi(matches[0] + matches[len(matches)-1])
 		}
 	}
-
-	log.Printf("Input: %s, Result: %d", input, result)
 
 	return result
 }

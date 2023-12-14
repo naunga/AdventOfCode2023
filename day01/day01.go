@@ -8,6 +8,7 @@ import (
 
 func Run(fileName string) {
 	part01Answer := 0
+	part02Answer := 0
 
 	file, err := os.Open(fileName)
 	if err != nil {
@@ -25,6 +26,7 @@ func Run(fileName string) {
 	for scanner.Scan() {
 		line := scanner.Text()
 		part01Answer += GetPart01Value(line)
+		part02Answer += GetPart02Value(line)
 	}
 
 	if err := scanner.Err(); err != nil {
@@ -32,4 +34,5 @@ func Run(fileName string) {
 	}
 
 	log.Printf("Part01: Calibration values sum: %d", part01Answer)
+	log.Printf("Part02: Calibration values sum: %d", part02Answer)
 }
