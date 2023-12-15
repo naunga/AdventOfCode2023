@@ -2,6 +2,7 @@ package main
 
 import (
 	"AdventOfCode/day01"
+	"AdventOfCode/day02"
 	"fmt"
 	"os"
 )
@@ -12,6 +13,7 @@ type Day interface {
 
 var days = map[string]Day{
 	"day01": day01.Day01{},
+	"day02": day02.Day02{},
 }
 
 func main() {
